@@ -1,4 +1,5 @@
 # Object file
+obj/
 *.o
 
 # Ada Library Information

@@ -15,7 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.      *
  ******************************************************************************/
 
-/* Kernel runtime for LovelaceOS */
+  .section .data
+  .section .text
 
 /* 0x80000000 starting address */
+  .global _entry
 _entry:
+  j _entry
