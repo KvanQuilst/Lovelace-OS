@@ -21,7 +21,6 @@
 /* 0x80000000 starting address */
   .global _entry
 _entry:
-  mv t1, zero
-1:
-  add t1, t1, 1
-  j 1b
+  li s1, 0x10000000 # s1 := 0x10000000
+  li s2, 0x48       # s2 := 'H'
+  sb s2, 0(s1)      # (s1) := s2

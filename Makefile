@@ -71,3 +71,4 @@ debug:
 .PHONY: clean
 clean:
 	gprclean -P ${OS_NAME}.gpr
+	rm -rf ${OS_NAME}
