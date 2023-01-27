@@ -43,10 +43,8 @@ SECTIONS {
 
   .bss :
   {
-    __bss_start = .
     *(.bss)
     *(.sbss)
-    __bss_end = .
   }
   . = ALIGN(0x8);
 }

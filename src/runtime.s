@@ -21,4 +21,7 @@
 /* 0x80000000 starting address */
   .global _entry
 _entry:
-  j _entry
+  mv t1, zero
+1:
+  add t1, t1, 1
+  j 1b
