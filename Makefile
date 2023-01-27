@@ -58,7 +58,7 @@ help:
 
 .PHONY: build
 build: 
-	gprbuild -P ${OS_NAME}.gpr -o lovelace
+	gprbuild -P ${OS_NAME}.gpr -o lovelace --config=riscv64-elf.cgpr
 
 .PHONY: run
 run:
