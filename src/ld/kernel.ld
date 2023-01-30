@@ -1,4 +1,5 @@
 /******************************************************************************
+ *                                                                            *
  * kernel.ld - LovelaceOS, Copyright 2023 - Dylan Eksew                       *
  *                                                                            *
  * LovelaceOS is free software: you can redistribute it and/or modify         *
@@ -13,10 +14,11 @@
  *                                                                            *
  * You should have received a copy of the GNU General Public License          *
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.      *
+ *                                                                            *
  ******************************************************************************/
 
 OUTPUT_ARCH( "riscv" )
-ENTRY( _entry )
+ENTRY( _start )
 
 SECTIONS {
 
@@ -43,8 +45,13 @@ SECTIONS {
 
   .bss :
   {
+    __bss_start = .;
     *(.bss)
     *(.sbss)
+    __bss_end = .;
   }
   . = ALIGN(0x8);
 }
+
+PROVIDE(__stack_start = __bss_end);
+PROVIDE(__stack_end = __start_start + 0x8000);

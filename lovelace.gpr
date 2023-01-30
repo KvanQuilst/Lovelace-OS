@@ -1,21 +1,38 @@
+--------------------------------------------------------------------------------
+--                                                                            --
+-- lovelace.gpr - LovelaceOS, Copyright 2023 - Dylan Eksew                    --
+--                                                                            --
+-- LovelaceOS is free software: you can redistribute it and/or modify         --
+-- it under the terms of the GNU General Public License as published by       --
+-- the Free Software Foundation, either version 3 of the License, or          --
+-- (at your option) any later version.                                        --
+--                                                                            --
+-- LovelaceOS is distributed in the hope that it will be useful,              --
+-- but WITHOUT ANY WARRANTY; without even the implied warranty of             --
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              --
+-- GNU General Public License for more details.                               --
+--                                                                            --
+-- You should have received a copy of the GNU General Public License          --
+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.      --
+--                                                                            --
+--------------------------------------------------------------------------------
+
 project Lovelace is
-  --for Languages use ("Ada", "Asm");
-  for Languages use ("Asm");
+  for Languages use ("Ada", "Asm");
   for Target use "riscv64-elf";
-  --for Runtime ("Ada") use Project'Project_Dir;
-  for Main use ("runtime.s");
+  for Main use ("boot.s");
 
   for Source_Dirs use ("src/**");
   for Object_Dir  use "obj";
   for Exec_Dir    use ".";
 
   package Compiler is
-    --for Default_Switches ("Ada") use ("-gnatg");
-    for Default_Switches ("Asm") use ("");
+    for Default_Switches ("Ada") use ("-g");
+    for Default_Switches ("Asm") use ("-g");
   end Compiler;
 
   package Linker is
-    for Required_Switches use --Linker'Required_Switches &
+    for Required_Switches use Linker'Required_Switches &
       ( "-nostartfiles", "-nolibc",
         "-T", "/home/dylan/Projects/lovelace/src/ld/kernel.ld");
   end Linker;

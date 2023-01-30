@@ -1,5 +1,36 @@
+--------------------------------------------------------------------------------
+--                                                                            --
+-- consio.ads - LovelaceOS, Copyright 2023 - Dylan Eksew                      --
+--                                                                            --
+-- LovelaceOS is free software: you can redistribute it and/or modify         --
+-- it under the terms of the GNU General Public License as published by       --
+-- the Free Software Foundation, either version 3 of the License, or          --
+-- (at your option) any later version.                                        --
+--                                                                            --
+-- LovelaceOS is distributed in the hope that it will be useful,              --
+-- but WITHOUT ANY WARRANTY; without even the implied warranty of             --
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              --
+-- GNU General Public License for more details.                               --
+--                                                                            --
+-- You should have received a copy of the GNU General Public License          --
+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.      --
+--                                                                            --
+--------------------------------------------------------------------------------
+
+pragma Style_Checks (off);
+
+with System; use System;
+with Interfaces; use Interfaces;
+
 package Consio is
 
-  procedure Put_Char(C : Character);
+  procedure Put_Char (C : Character);
+
+private
+
+  Serial_Address : constant Address := System'To_Address (16#1000_0000#);
+
+  Serial_Register : Unsigned_64
+    with Volatile, Address => Serial_Address;
 
 end Consio;
