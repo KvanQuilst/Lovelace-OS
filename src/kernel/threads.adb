@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 --                                                                            --
--- main.adb - LovelaceOS, Copyright 2023 - Dylan Eksew                        --
+-- threads.adb - LovelaceOS, Copyright 2023 - Dylan Eksew                     --
 --                                                                            --
 -- LovelaceOS is free software: you can redistribute it and/or modify         --
 -- it under the terms of the GNU General Public License as published by       --
@@ -17,24 +17,24 @@
 --                                                                            --
 --------------------------------------------------------------------------------
 
-pragma Style_Checks (off);
-pragma Warnings (off);
+package body Threads is
 
-with Serial; use Serial;
+  function Init return Thread is
+    T : Thread;
+  begin
+    return T;
+  end Init;
 
-procedure Main is
-begin
-  Put_Char ('H');
-  Put_Char ('E');
-  Put_Char ('L');
-  Put_Char ('L');
-  Put_Char ('O');
-  Put_Char (' ');
-  Put_Char ('W');
-  Put_Char ('O');
-  Put_Char ('R');
-  Put_Char ('L');
-  Put_Char ('D');
-  Put_Char ('!');
-  Put_Char (Character'Val (10));
-end Main;
+
+  procedure Yield is
+  begin
+    null;
+  end Yield;
+
+
+  procedure Sleep is
+  begin
+    null;
+  end Sleep;
+
+end Threads;

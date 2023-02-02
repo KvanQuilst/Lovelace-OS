@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 --                                                                            --
--- main.adb - LovelaceOS, Copyright 2023 - Dylan Eksew                        --
+-- kernel.ads - LovelaceOS, Copyright 2023 - Dylan Eksew                      --
 --                                                                            --
 -- LovelaceOS is free software: you can redistribute it and/or modify         --
 -- it under the terms of the GNU General Public License as published by       --
@@ -16,25 +16,23 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.      --
 --                                                                            --
 --------------------------------------------------------------------------------
+with Interfaces; use Interfaces;
 
-pragma Style_Checks (off);
-pragma Warnings (off);
+package Kernel is
 
-with Serial; use Serial;
+  ----------------------
+  -- Kernel Constants --
+  ----------------------
+  
+  SYS_STACK_SIZE : constant := 1024;
+  NUM_THREADS    : constant := 8;
 
-procedure Main is
-begin
-  Put_Char ('H');
-  Put_Char ('E');
-  Put_Char ('L');
-  Put_Char ('L');
-  Put_Char ('O');
-  Put_Char (' ');
-  Put_Char ('W');
-  Put_Char ('O');
-  Put_Char ('R');
-  Put_Char ('L');
-  Put_Char ('D');
-  Put_Char ('!');
-  Put_Char (Character'Val (10));
-end Main;
+
+  -----------------------
+  -- Kernel Prototypes --
+  -----------------------
+
+  procedure Start;
+  procedure OS_Main;
+
+end Kernel;

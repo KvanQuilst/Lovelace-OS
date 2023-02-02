@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 --                                                                            --
--- main.adb - LovelaceOS, Copyright 2023 - Dylan Eksew                        --
+-- list.ads - LovelaceOS, Copyright 2023 - Dylan Eksew                        --
 --                                                                            --
 -- LovelaceOS is free software: you can redistribute it and/or modify         --
 -- it under the terms of the GNU General Public License as published by       --
@@ -17,24 +17,31 @@
 --                                                                            --
 --------------------------------------------------------------------------------
 
-pragma Style_Checks (off);
-pragma Warnings (off);
+generic 
+  type T is private;
+package List is
 
-with Serial; use Serial;
+  type List is limited private;
 
-procedure Main is
-begin
-  Put_Char ('H');
-  Put_Char ('E');
-  Put_Char ('L');
-  Put_Char ('L');
-  Put_Char ('O');
-  Put_Char (' ');
-  Put_Char ('W');
-  Put_Char ('O');
-  Put_Char ('R');
-  Put_Char ('L');
-  Put_Char ('D');
-  Put_Char ('!');
-  Put_Char (Character'Val (10));
-end Main;
+  function  Is_Empty     (L : in     List) return Boolean;
+  procedure Add_To_Front (L : in out List; Value : in T);
+  procedure Add_To_End   (L : in out List; Value : in T);
+  function  Remove       (L : in out List) return T;
+
+private
+
+  type List_Node;
+  type List_Node_Acc is access List_Node;
+
+  type List_Node is record
+    Value : T;
+    Next : List_Node_Acc; 
+  end record;
+
+  type List is record
+    Head   : List_Node_Acc;
+    Tail   : List_Node_Acc;
+    Length : Integer;
+  end record;
+
+end List;

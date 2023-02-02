@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 --                                                                            --
--- main.adb - LovelaceOS, Copyright 2023 - Dylan Eksew                        --
+-- list.adb - LovelaceOS, Copyright 2023 - Dylan Eksew                        --
 --                                                                            --
 -- LovelaceOS is free software: you can redistribute it and/or modify         --
 -- it under the terms of the GNU General Public License as published by       --
@@ -17,24 +17,34 @@
 --                                                                            --
 --------------------------------------------------------------------------------
 
-pragma Style_Checks (off);
-pragma Warnings (off);
+package body List is
 
-with Serial; use Serial;
+  function Is_Empty (L : in List) return Boolean is
+  begin
+    return L.Head = null;
+  end Is_Empty;
 
-procedure Main is
-begin
-  Put_Char ('H');
-  Put_Char ('E');
-  Put_Char ('L');
-  Put_Char ('L');
-  Put_Char ('O');
-  Put_Char (' ');
-  Put_Char ('W');
-  Put_Char ('O');
-  Put_Char ('R');
-  Put_Char ('L');
-  Put_Char ('D');
-  Put_Char ('!');
-  Put_Char (Character'Val (10));
-end Main;
+  procedure Add_To_Front (L : in out List; Value : in T) is
+    N : List_Node_Acc;
+  begin
+    N := new List_Node'(Value, L.Head);
+    L.Head := N;    
+  end Add_To_Front;
+
+  procedure Add_To_End (L : in out List; Value : in T) is
+    N : List_Node_Acc;
+  begin
+    N := new List_Node'(Value, null);
+    L.Tail.Next := N;
+    L.Tail := N;
+  end Add_To_End;
+
+  function Remove (L : in out List) return T is
+    Value : T;
+  begin
+    Value := L.Head.Value; 
+    L.Head := L.Head.Next;
+    return Value;
+  end Remove;
+
+end List;

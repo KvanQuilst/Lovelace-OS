@@ -35,7 +35,7 @@ L2:
   bne  s1, s2, L1         # if s1 != s2, j 1b
 
   /* Set Stack */
-  la   sp, __stack_start  # sp := __stack_start
+  la   sp, __stack_end    # sp := __stack_end; stacks grow down
   
   /* Jump to Ada */
   j _ada_main

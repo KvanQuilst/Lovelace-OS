@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 --                                                                            --
--- main.adb - LovelaceOS, Copyright 2023 - Dylan Eksew                        --
+-- kernel.adb - LovelaceOS, Copyright 2023 - Dylan Eksew                      --
 --                                                                            --
 -- LovelaceOS is free software: you can redistribute it and/or modify         --
 -- it under the terms of the GNU General Public License as published by       --
@@ -17,24 +17,29 @@
 --                                                                            --
 --------------------------------------------------------------------------------
 
-pragma Style_Checks (off);
-pragma Warnings (off);
+with CPU; use CPU;
 
-with Serial; use Serial;
+package body Kernel is
 
-procedure Main is
-begin
-  Put_Char ('H');
-  Put_Char ('E');
-  Put_Char ('L');
-  Put_Char ('L');
-  Put_Char ('O');
-  Put_Char (' ');
-  Put_Char ('W');
-  Put_Char ('O');
-  Put_Char ('R');
-  Put_Char ('L');
-  Put_Char ('D');
-  Put_Char ('!');
-  Put_Char (Character'Val (10));
-end Main;
+  procedure Start is
+    Interrupt_State : Status_Reg;
+  begin 
+
+    Interrupt_State := Disable_Interrupts;
+
+    -- Setup Hardware --
+
+    -- Setup idle thread for each hart --
+    
+    -- Setup trap/interrupt vector --
+    
+    -- Get a thread and Start --
+
+  end Start;
+
+  procedure OS_Main is
+  begin
+    null;
+  end OS_Main;
+
+end Kernel;

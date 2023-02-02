@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 --                                                                            --
--- consio.adb - LovelaceOS, Copyright 2023 - Dylan Eksew                      --
+-- ints.ads - LovelaceOS, Copyright 2023 - Dylan Eksew                        --
 --                                                                            --
 -- LovelaceOS is free software: you can redistribute it and/or modify         --
 -- it under the terms of the GNU General Public License as published by       --
@@ -17,13 +17,19 @@
 --                                                                            --
 --------------------------------------------------------------------------------
 
-pragma Style_Checks (off);
+package Ints is
 
-package body Consio is
+  type Bit is mod 2**1
+    with Size => 1;
+  type Unsigned_2 is mod 2**2
+    with Size => 2;
 
-	procedure Put_Char (C : Character) is
-	begin
-		Serial_Register := Character'Pos (C);
-	end Put_Char;
+  type Unsigned_9 is mod 2**9
+    with Size => 9;
 
-end Consio;
+  type Unsigned_25 is mod 2**25
+    with Size => 25;
+
+  
+
+end Ints;

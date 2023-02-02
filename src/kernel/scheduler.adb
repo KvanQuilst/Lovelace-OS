@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 --                                                                            --
--- consio.ads - LovelaceOS, Copyright 2023 - Dylan Eksew                      --
+-- scheduler.adb - LovelaceOS, Copyright 2023 - Dylan Eksew                   --
 --                                                                            --
 -- LovelaceOS is free software: you can redistribute it and/or modify         --
 -- it under the terms of the GNU General Public License as published by       --
@@ -17,20 +17,11 @@
 --                                                                            --
 --------------------------------------------------------------------------------
 
-pragma Style_Checks (off);
+package body Scheduler is
 
-with System; use System;
-with Interfaces; use Interfaces;
+  procedure Idle is
+  begin
+    null;
+  end Idle;
 
-package Consio is
-
-  procedure Put_Char (C : Character);
-
-private
-
-  Serial_Address : constant Address := System'To_Address (16#1000_0000#);
-
-  Serial_Register : Unsigned_64
-    with Volatile, Address => Serial_Address;
-
-end Consio;
+end Scheduler;

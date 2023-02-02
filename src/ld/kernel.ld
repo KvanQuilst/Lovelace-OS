@@ -54,4 +54,4 @@ SECTIONS {
 }
 
 PROVIDE(__stack_start = __bss_end);
-PROVIDE(__stack_end = __start_start + 0x8000);
+PROVIDE(__stack_end = __stack_start + 0x8000);
