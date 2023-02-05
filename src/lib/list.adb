@@ -29,6 +29,7 @@ package body List is
   begin
     N := new List_Node'(Value, L.Head);
     L.Head := N;    
+    L.Length := L.Length + 1;
   end Add_To_Front;
 
   procedure Add_To_End (L : in out List; Value : in T) is
@@ -37,6 +38,7 @@ package body List is
     N := new List_Node'(Value, null);
     L.Tail.Next := N;
     L.Tail := N;
+    L.Length := L.Length + 1;
   end Add_To_End;
 
   function Remove (L : in out List) return T is
@@ -44,6 +46,7 @@ package body List is
   begin
     Value := L.Head.Value; 
     L.Head := L.Head.Next;
+    L.Length := L.Length - 1;
     return Value;
   end Remove;
 
