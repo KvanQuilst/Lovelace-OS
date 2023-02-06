@@ -26,13 +26,19 @@ package body Threads is
   end Init;
 
 
-  procedure Yield is
+  procedure Run (T : Thread_Acc) is
+  begin
+    null;
+  end Run;
+
+
+  procedure Yield (T : Thread_Acc) is
   begin
     null;
   end Yield;
 
 
-  procedure Sleep is
+  procedure Sleep (T : Thread_Acc) is
   begin
     null;
   end Sleep;

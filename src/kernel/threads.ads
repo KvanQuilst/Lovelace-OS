@@ -36,9 +36,12 @@ package Threads is
   end record
     with Pack;
 
+  type Thread_Acc is access Thread;
+
   function Init return Thread;
 
-  procedure Yield;
-  procedure Sleep;
+  procedure Run   (T : Thread_Acc);
+  procedure Yield (T : Thread_Acc);
+  procedure Sleep (T : Thread_Acc);
 
 end Threads;

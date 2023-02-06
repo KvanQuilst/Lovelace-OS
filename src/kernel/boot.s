@@ -39,3 +39,14 @@ L2:
   
   /* Jump to Ada */
   j _ada_main
+
+
+  .global __gnat_exit
+__gnat_exit:
+  wfi
+  j __gnat_exit
+
+  .global putchar
+putchar:
+  wfi
+  j putchar

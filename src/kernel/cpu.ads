@@ -93,6 +93,8 @@ package CPU is
   ----------------
   -- Prototypes --
   ----------------
+  
+  procedure Panic (Mesg : String);
 
   function Disable_Interrupts return Status_Reg;
   procedure Enable_Interrupts;

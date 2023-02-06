@@ -48,10 +48,17 @@ SECTIONS {
     __bss_start = .;
     *(.bss)
     *(.sbss)
-    __bss_end = .;
-  }
   . = ALIGN(0x8);
-}
+    __bss_end = .;
 
-PROVIDE(__stack_start = __bss_end);
-PROVIDE(__stack_end = __stack_start + 0x8000);
+  __stack_start = .;
+  . += 0x8000;
+  . = ALIGN(0x8);
+  __stack_end = .;
+
+  __heap_start = .;
+  . += 0x8000;
+  . = ALIGN(0x8);
+  __heap_end = .;
+  }
+}

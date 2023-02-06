@@ -45,7 +45,7 @@ package body CPU is
   ---------------------------
   -- Public CPU Management --
   ---------------------------
-
+  
   function Disable_Interrupts return Status_Reg is
     Interrupt_State, Old_State : Status_Reg;
   begin
@@ -71,5 +71,16 @@ package body CPU is
     Interrupt_State.MIE := State.MIE;
     Put_MStatus(Interrupt_State);
   end Restore_Interrupts;
+
+
+  procedure Panic (Mesg : String) is
+    Ints : Status_Reg;
+  begin
+    Ints := Disable_Interrupts;
+    -- TODO Print error and kernel details
+    loop
+      null;
+    end loop;
+  end Panic;
 
 end CPU;

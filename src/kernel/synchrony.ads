@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 --                                                                            --
--- scheduler.adb - LovelaceOS, Copyright 2023 - Dylan Eksew                   --
+-- synchrony.ads - LovelaceOS, Copyright 2023 - Dylan Eksew                   --
 --                                                                            --
 -- LovelaceOS is free software: you can redistribute it and/or modify         --
 -- it under the terms of the GNU General Public License as published by       --
@@ -16,17 +16,43 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.      --
 --                                                                            --
 --------------------------------------------------------------------------------
+with Interfaces; use Interfaces;
+with List;
+with Threads; use Threads;
 
-package body Scheduler is
+package Synchrony is
+  package Thread_List is new 
+    List (Thread, Thread_Acc); use Thread_List;
 
-  procedure Idle is
-  begin
-    null;
-  end Idle;
+  type Semaphore is limited private;
 
-  function Current_Thread return Thread_Acc is
-  begin
-    return null;
-  end Current_Thread;
+  type Mutex     is limited private;
 
-end Scheduler;
+  --------------------------
+  -- Semaphore Prototypes --
+  --------------------------
+  
+  function Semaphore_Init  (Init_Val : Unsigned_64) return access Semaphore;
+  procedure Semaphore_Up   (S : access Semaphore);
+  procedure Semaphore_Down (S : access Semaphore);
+
+  ----------------------
+  -- Mutex Prototypes --
+  ----------------------
+
+  procedure Mutex_Lock   (M : access Mutex);
+  procedure Mutex_Unlock (M : access Mutex);
+
+private
+
+  type Semaphore is record
+    Count     : Unsigned_64;
+    Wait_List : Thread_List.List;
+  end record;
+
+  type Mutex is record
+    Held_By   : Thread_Acc; 
+    Wait_List : Thread_List.List;
+  end record;
+
+end Synchrony;

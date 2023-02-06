@@ -16,9 +16,17 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.      --
 --                                                                            --
 --------------------------------------------------------------------------------
+with List;
+with Threads; use Threads;
 
 package Scheduler is
+  package Thread_List is new List (Thread, Thread_Acc); use Thread_List;
 
   procedure Idle;
+  function Current_Thread return Thread_Acc;
+
+private
+
+  Ready_List : Thread_List.List;
 
 end Scheduler;

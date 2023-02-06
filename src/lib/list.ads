@@ -19,14 +19,15 @@
 
 generic 
   type T is private;
+  type T_Acc is access T;
 package List is
 
   type List is limited private;
 
   function  Is_Empty     (L : in     List) return Boolean;
-  procedure Add_To_Front (L : in out List; Value : in T);
-  procedure Add_To_End   (L : in out List; Value : in T);
-  function  Remove       (L : in out List) return T;
+  procedure Add_To_Front (L : in out List; Value : in T_Acc);
+  procedure Add_To_End   (L : in out List; Value : in T_Acc);
+  function  Remove       (L : in out List) return T_Acc;
 
 private
 
@@ -34,7 +35,7 @@ private
   type List_Node_Acc is access List_Node;
 
   type List_Node is record
-    Value : T;
+    Value : T_Acc;
     Next : List_Node_Acc; 
   end record;
 

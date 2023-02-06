@@ -24,7 +24,7 @@ package body List is
     return L.Head = null;
   end Is_Empty;
 
-  procedure Add_To_Front (L : in out List; Value : in T) is
+  procedure Add_To_Front (L : in out List; Value : in T_Acc) is
     N : List_Node_Acc;
   begin
     N := new List_Node'(Value, L.Head);
@@ -32,7 +32,7 @@ package body List is
     L.Length := L.Length + 1;
   end Add_To_Front;
 
-  procedure Add_To_End (L : in out List; Value : in T) is
+  procedure Add_To_End (L : in out List; Value : in T_Acc) is
     N : List_Node_Acc;
   begin
     N := new List_Node'(Value, null);
@@ -41,9 +41,13 @@ package body List is
     L.Length := L.Length + 1;
   end Add_To_End;
 
-  function Remove (L : in out List) return T is
-    Value : T;
+  function Remove (L : in out List) return T_Acc is
+    Value : T_Acc;
   begin
+    if L.Length = 0 then
+      return null;
+    end if;
+
     Value := L.Head.Value; 
     L.Head := L.Head.Next;
     L.Length := L.Length - 1;
