@@ -21,12 +21,10 @@
 
 OS_NAME := lovelace
 
-OBJ_DIR := obj
-
 # Tool Definitions
 PREFIX    := riscv64-elf
 GPRBUILD  := gprbuild
-GPR_FLAGS := --RTS=lib/runtime #--config=riscv64-elf.cgpr
+GPR_FLAGS := --RTS=sys/runtime
 
 N_CPUS ?= 1
 
