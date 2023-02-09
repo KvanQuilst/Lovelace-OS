@@ -24,8 +24,9 @@ OS_NAME := lovelace
 OBJ_DIR := obj
 
 # Tool Definitions
-PREFIX   := riscv64-elf
-GPRBUILD := gprbuild
+PREFIX    := riscv64-elf
+GPRBUILD  := gprbuild
+GPR_FLAGS := --RTS=lib/runtime #--config=riscv64-elf.cgpr
 
 N_CPUS ?= 1
 
@@ -60,7 +61,7 @@ help:
 
 .PHONY: build
 build: 
-	gprbuild -P ${OS_NAME}.gpr -o lovelace --config=riscv64-elf.cgpr
+	gprbuild -P ${OS_NAME}.gpr -o ${OS_NAME} ${GPR_FLAGS}
 
 .PHONY: run
 run:

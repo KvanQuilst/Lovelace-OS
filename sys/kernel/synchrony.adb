@@ -17,11 +17,12 @@
 --                                                                            --
 --------------------------------------------------------------------------------
 with CPU; use CPU;
+with Interfaces.Lovelace; use Interfaces.Lovelace;
 with Scheduler;
 
 package body Synchrony is
 
-  function Semaphore_Init (Init_Val : Unsigned_64) return access Semaphore is
+  function Semaphore_Init (Init_Val : UInt64) return access Semaphore is
     S : access Semaphore;
   begin
     return null;

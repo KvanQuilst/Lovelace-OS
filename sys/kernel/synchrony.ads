@@ -16,7 +16,7 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.      --
 --                                                                            --
 --------------------------------------------------------------------------------
-with Interfaces; use Interfaces;
+with Interfaces.Lovelace; use Interfaces.Lovelace;
 with List;
 with Threads; use Threads;
 
@@ -32,7 +32,7 @@ package Synchrony is
   -- Semaphore Prototypes --
   --------------------------
   
-  function Semaphore_Init  (Init_Val : Unsigned_64) return access Semaphore;
+  function Semaphore_Init  (Init_Val : UInt64) return access Semaphore;
   procedure Semaphore_Up   (S : access Semaphore);
   procedure Semaphore_Down (S : access Semaphore);
 
@@ -46,7 +46,7 @@ package Synchrony is
 private
 
   type Semaphore is record
-    Count     : Unsigned_64;
+    Count     : UInt64;
     Wait_List : Thread_List.List;
   end record;
 

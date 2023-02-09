@@ -16,8 +16,7 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.      --
 --                                                                            --
 --------------------------------------------------------------------------------
-with Interfaces; use Interfaces;
-with Ints; use Ints;
+with Interfaces.Lovelace; use Interfaces.Lovelace;
 
 package CPU is
 
@@ -28,7 +27,7 @@ package CPU is
   type Status_Reg (Raw : Boolean := True) is record
     case Raw is
       when True => 
-        Status     : Unsigned_64;
+        Status     : UInt64;
       when False =>
         WPRI_0_0   : Bit;
         SIE        : Bit;         -- Supervisor Interrupt Enable
@@ -39,22 +38,22 @@ package CPU is
         UBE        : Bit;         --
         MPIE       : Bit;         --
         SPP        : Bit;         --
-        VS         : Unsigned_2;  --
-        MPP        : Unsigned_2;  --
-        FS         : Unsigned_2;  --
-        XS         : Unsigned_2;  --
+        VS         : UInt2;       --
+        MPP        : UInt2;       --
+        FS         : UInt2;       --
+        XS         : UInt2;       --
         MPRV       : Bit;         --
         SUM        : Bit;         --
         MXR        : Bit;         --
         TVM        : Bit;         --
         TW         : Bit;         --
         TSR        : Bit;         --
-        WPRI_23_31 : Unsigned_9; 
-        UXL        : Unsigned_2;  --
-        SXL        : Unsigned_2;  --
+        WPRI_23_31 : UInt9; 
+        UXL        : UInt2;       --
+        SXL        : UInt2;       --
         SBE        : Bit;         --
         MBE        : Bit;         --
-        WPRI_38_62 : Unsigned_25; 
+        WPRI_38_62 : UInt25; 
         SD         : Bit;         --
     end case;
   end record

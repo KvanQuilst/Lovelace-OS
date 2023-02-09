@@ -16,7 +16,6 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.      --
 --                                                                            --
 --------------------------------------------------------------------------------
-with Interfaces; use Interfaces;
 with System.Machine_Code; use System.Machine_Code;
 
 package body CPU is
@@ -29,7 +28,7 @@ package body CPU is
     Interrupt_State : Status_Reg;
   begin
     Asm ("csrr %0, mstatus", 
-         Outputs => Unsigned_64'Asm_Output ("=g", Interrupt_State.Status),
+         Outputs => UInt64'Asm_Output ("=g", Interrupt_State.Status),
          Volatile => True);
     return Interrupt_State;
   end Get_MStatus;
@@ -37,7 +36,7 @@ package body CPU is
   procedure Put_MStatus (Interrupt_State : Status_Reg) is
   begin
     Asm ("csrw mstatus, %0",
-         Inputs => Unsigned_64'Asm_Input ("g", Interrupt_State.Status),
+         Inputs => UInt64'Asm_Input ("g", Interrupt_State.Status),
          Volatile => True);
   end Put_MStatus;
 
