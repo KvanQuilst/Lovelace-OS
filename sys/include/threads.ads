@@ -26,6 +26,7 @@ package Threads is
     with Size => 8;
 
   type Thread is record
+    Next         : access Thread;
     ID           : Unsigned_8;
     State        : Thread_State;
     Thread_Start : Start_Function;

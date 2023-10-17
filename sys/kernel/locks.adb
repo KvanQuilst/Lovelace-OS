@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 --                                                                            --
--- synchrony.adb - LovelaceOS, Copyright 2023 - Dylan Eksew                   --
+-- locks.adb - LovelaceOS, Copyright 2023 - Dylan Eksew                       --
 --                                                                            --
 -- LovelaceOS is free software: you can redistribute it and/or modify         --
 -- it under the terms of the GNU General Public License as published by       --
@@ -20,27 +20,28 @@ with CPU; use CPU;
 with Interfaces.Lovelace; use Interfaces.Lovelace;
 with Scheduler;
 
-package body Synchrony is
+package body Locks is
 
-  function Semaphore_Init (Init_Val : UInt64) return access Semaphore is
-    S : access Semaphore;
+  function Init_Semaphore (Init_Val : UInt64) return Semaphore is
+    S : Semaphore;
   begin
-    return null;
-  end Semaphore_Init;
+    S := (Init_Val, Thread_List.Init_List);
+    return S;
+  end Init_Semaphore;
 
 
-  procedure Semaphore_Up (S : access Semaphore) is
-  begin
-    null;
-  end Semaphore_Up;
-
-  procedure Semaphore_Down (S : access Semaphore) is
+  procedure Up (S : in out Semaphore) is
   begin
     null;
-  end Semaphore_Down;
+  end Up;
+
+  procedure Down (S : in out Semaphore) is
+  begin
+    null;
+  end Down;
 
 
-  procedure Mutex_Lock (M : access Mutex) is
+  procedure Lock (M : in out Mutex) is
     Curr_T : Thread_Acc;
     Old_Ints : Status_Reg;
   begin
@@ -59,9 +60,9 @@ package body Synchrony is
     end if;
 
     Restore_Interrupts (Old_Ints);
-  end Mutex_Lock;
+  end Lock;
 
-  procedure Mutex_Unlock (M : access Mutex) is
+  procedure Unlock (M : in out Mutex) is
     Curr_T, Next : Thread_Acc;
     Old_Ints : Status_Reg;
   begin
@@ -81,6 +82,6 @@ package body Synchrony is
     end if;
         
     Restore_Interrupts (Old_Ints);
-  end Mutex_Unlock;
+  end Unlock;
 
-end Synchrony;
+end Locks;

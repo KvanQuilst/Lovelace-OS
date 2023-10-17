@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 --                                                                            --
--- threads-manager.ads - LovelaceOS, Copyright 2023 - Dylan Eksew             --
+-- locks.ads - LovelaceOS, Copyright 2023 - Dylan Eksew                       --
 --                                                                            --
 -- LovelaceOS is free software: you can redistribute it and/or modify         --
 -- it under the terms of the GNU General Public License as published by       --
@@ -16,14 +16,43 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.      --
 --                                                                            --
 --------------------------------------------------------------------------------
-with Synchrony; use Synchrony;
+with Interfaces.Lovelace; use Interfaces.Lovelace;
+with List;
+with Threads; use Threads;
 
-package Threads.Manager is
+package Locks is
+  package Thread_List is new 
+    List (Thread, Thread_Acc); use Thread_List;
+
+  type Semaphore is limited private;
+
+  type Mutex     is limited private;
+
+  --------------------------
+  -- Semaphore Prototypes --
+  --------------------------
+  
+  function Init_Semaphore (Init_Val : UInt64) return Semaphore;
+  procedure Up   (S : in out Semaphore);
+  procedure Down (S : in out Semaphore);
+
+  ----------------------
+  -- Mutex Prototypes --
+  ----------------------
+
+  procedure Lock   (M : in out Mutex);
+  procedure Unlock (M : in out Mutex);
 
 private
 
-  type Thread_Manager is record
-    M : access Mutex;
+  type Semaphore is record
+    Count     : UInt64;
+    Wait_List : Thread_List.List;
   end record;
 
-end Threads.Manager;
+  type Mutex is record
+    Held_By   : Thread_Acc; 
+    Wait_List : Thread_List.List;
+  end record;
+
+end Locks;

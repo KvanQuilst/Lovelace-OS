@@ -24,6 +24,7 @@ package List is
 
   type List is limited private;
 
+  function  Init_List                      return List;
   function  Is_Empty     (L : in     List) return Boolean;
   procedure Add_To_Front (L : in out List; Value : in T_Acc);
   procedure Add_To_End   (L : in out List; Value : in T_Acc);

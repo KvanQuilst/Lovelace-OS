@@ -19,6 +19,11 @@
 
 package body List is
 
+  function Init_List return List is
+  begin
+    return (null, null, 0);
+  end Init_List;
+
   function Is_Empty (L : in List) return Boolean is
   begin
     return L.Head = null;
